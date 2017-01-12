@@ -1,0 +1,178 @@
+<html>
+  <head>
+    <title>StoragePy</title>
+    <meta charSet="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <header class="header">
+      <div class="container-lrg">
+        <div class="col-12 spread">
+          <div>
+            <span class="logo">
+              StoragePy
+            </span>
+          </div>
+          <div>
+            <a class="nav-link" href="https://github.com/horefice/storagePy" target="_blank">
+              GitHub
+            </a>
+            <a class="nav-link" href="mailto:horefice@gmail.com" target="_top">
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="container-lrg flex">
+        <div class="col-6 text-center">
+          <h1 class="heading">
+            A python-based testing platform for your JSONs
+          </h1>
+          <h2 class="paragraph">
+            We're creating the best testing platform when starting a new project with a database using JSON/BSON. With StoragePy you can instantly have a powerfull, solid RESTfull API to access our test ready MongoDB. And that's for you.
+          </h2>
+          <form id="signup">
+            <div class="ctas">
+              <input class="ctas-input" type="email" placeholder="Your Email Address" required>
+              <button class="ctas-button">
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-6">
+          <div class="shell-wrap">
+            <p class="shell-top-bar">/Users/johnsnow/Documents/myproject/</p>
+            <ul class="shell-body">
+              <li>
+                <p class="command1"></p>
+                <p class="result1"></p>
+              </li>
+              <li>
+                <p class="command2"></p>
+                <p class="result2"></p>
+              </li>
+              <li>
+                <p class="command3"></p>
+                <p class="result3"></p>
+              </li>
+              <li>
+                <p class="command4"></p>
+                <p class="result4"></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="feature">
+      <div class="container-lrg flex">
+        <div class="col-6">
+          <b class="emoji">
+            🖥
+          </b>
+          <h3 class="subheading">
+            Built with the latest technologies.
+          </h3>
+          <p class="paragraph">
+            StoragePy is built with python and the latest technologies to provide you secure, instant access to our MongoDB. No extra effort while testing.
+          </p>
+        </div>
+        <div class="col-6">
+          <b class="emoji">
+            💵
+          </b>
+          <h3 class="subheading">
+            Test ready platform. For FREE.
+          </h3>
+          <p class="paragraph">
+            Having a test ready platform for your new project has never been soooo easy! With StoragePy you can have it for FREE, no strings attached. Just make a fair use of it.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="socialproof">
+      <div class="container-sml">
+        <div class="flex text-center">
+          <div class="col-12">
+            <h4 class="subheading">
+              "What a time saver for startup founders...this can be one of the most awful and creative sinkholes that a team goes through... Bravo for making this hellish process a little better."
+            </h4>
+            <p class="paragraph">
+              Sean Howell - CEO @ Hornetapp
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="container-sml">
+        <div class="col-12 text-center">
+          <div>
+            <a class="nav-link" href="https://github.com/horefice/storagePy" target="_blank">
+              GitHub
+            </a>
+            <a class="nav-link" href="mailto:horefice@gmail.com" target="_top">
+              Contact
+            </a>
+            <a class="nav-link" href="./LICENSE" target="_blank">
+              Terms of Use
+            </a>
+          </div>
+          <br>
+          <div>
+            <span>
+              © 2016 H.Orefice
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/typed.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      $("#signup").submit(function(e){
+        e.preventDefault();
+        var email = $(this).find('input[type="email"]').val();
+        $.post("http://api.storagepy.tk/signup", {'email': email}, function (data) {
+            alert("Your username is " + String(data["hash"]) +
+              "\n In case you lose it, signup again and your data will still be there for you!");
+          }).fail(function(){alert("Error occured. Try again!")});
+      })
+    });
+    $(function(){
+      $(".command1").typed({
+        strings: [`$ ^2000curl -H "Content-Type: application/json" -X POST -d '{"user":"xyz","password":"xyz"}' http://api.storagepy.tk/username^600`],
+        showCursor: false,
+        callback: function() {
+          $(".result1").html('{"data": {"password": "xyz", "user": "xyz"}}<p>$</p>')
+          $(".command2").typed({
+              strings: [`^800$ ^200curl -H "Content-Type: application/json" -X PUT -d '{"user":"xyz","password":"abcd"}' http://api.storagepy.tk/username^600`],
+              showCursor: false,
+              callback: function() {
+                $(".result2").html('{"data": {"password": "abcd", "user": "xyz"}}<p>$</p>')
+                $(".command3").typed({
+                    strings: [`^800$ ^200 curl -X DELETE http://api.storagepy.tk/username^600`],
+                    showCursor: false,
+                    callback: function() {
+                      $(".result3").html('{"result": true}<p>$</p>')
+                      $(".command4").typed({
+                        strings: [`^800$ ^200 curl -X GET http://api.storagepy.tk/username^600`],
+                        showCursor: false,
+                        callback: function() {
+                          $(".result4").html('{"data": {}}<p>$</p>')
+                        }
+                      })
+                    }
+                });
+              }
+          });
+        }
+      });
+    });
+  </script>
+  </body>
+</html>

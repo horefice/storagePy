@@ -22,11 +22,11 @@ load_dotenv(os.path.join(basedir, ".env"))
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 limiter = Limiter(
-    app, key_func=get_remote_address, global_limits=["10000 per day", "100 per minute"]
+    app, key_func=get_remote_address, default_limits=["10000 per day", "100 per minute"]
 )
 
 # MongoDB
-client = MongoClient(os.environ.get("DATABASE_URL"))
+client = MongoClient(os.environ.get("DATABASE_URL"), retryWrites=False)
 db = client[os.environ.get("DATABASE_DB")]
 collection = db[os.environ.get("DATABASE_COLLECTION")]
 

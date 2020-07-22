@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/horefice/storagePy.svg?branch=master)](https://travis-ci.org/horefice/storagePy)
+[![Build Status](https://travis-ci.com/horefice/storagePy.svg?branch=master)](https://travis-ci.com/horefice/storagePy)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 

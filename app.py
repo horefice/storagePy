@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Libs
-from cfg import cfg
+from dotenv import load_dotenv
 from flask import Flask, jsonify, abort, request, make_response
 from pymongo import MongoClient, ReturnDocument
 from flask_httpauth import HTTPBasicAuth
@@ -11,17 +11,22 @@ from string import hexdigits
 from hashlib import md5
 from functools import wraps
 from datetime import datetime
+import os
 import re
 
-# MongoDB
-client = MongoClient(cfg['mongourl'])
-db = client[cfg['db']]
-collection = db[cfg['collection']]
+# Env
+basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, ".env"))
 
 # App and add-ons
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 limiter = Limiter(app,key_func=get_remote_address,global_limits=["10000 per day", "100 per minute"])
+
+# MongoDB
+client = MongoClient(os.environ.get("DATABASE_URL"))
+db = client[os.environ.get("DATABASE_DB")]
+collection = db[os.environ.get("DATABASE_COLLECTION")]
 
 # Errors
 @app.errorhandler(400)
@@ -47,8 +52,8 @@ def too_many_requests(error):
 # Helpers
 @auth.get_password
 def get_password(username):
-    if username == cfg['user']:
-        return cfg['password']
+    if username == os.environ.get("DATABASE_USER"):
+        return os.environ.get("DATABASE_PASSWORD")
     return None
 
 def validate_userid(f):
